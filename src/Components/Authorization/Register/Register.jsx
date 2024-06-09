@@ -3,7 +3,7 @@ import youtubeIcon from "../../../assets/youtube.png";
 import Header from "../../Header/Header";
 import { InputValidation } from "../../../InputValidation";
 import "./Register.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -144,6 +144,9 @@ export default function Register() {
           </div>
 
           <button type="submit">SUBMIT</button>
+          <Link to="/">
+            <button className="back-link">back</button>
+          </Link>
         </form>
       </div>
     </>

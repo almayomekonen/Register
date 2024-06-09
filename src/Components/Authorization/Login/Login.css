@@ -54,3 +54,9 @@
   button:focus {
     background-color: #406159;
   }
+  .success{
+    text-align: center;
+    font-size: 1rem;
+    color: #142020;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
