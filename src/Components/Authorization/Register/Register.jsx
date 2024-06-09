@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import youtubeIcon from "../../../assets/youtube.png";
 import Header from "../../Header/Header";
 import { InputValidation } from "../../../InputValidation";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
 
-//... implementation of saving the users information
-
 export default function Register() {
-  //making the UI changes visible to the users;
   const [formData, setFormData] = useState({
     userName: "",
     password: "",
@@ -18,31 +15,35 @@ export default function Register() {
   });
 
   const navigate = useNavigate();
-  //making the UI changes visible to the users;
   const [errors, setErrors] = useState({});
-
   const [imageUrl, setImageUrl] = useState(null);
 
-  // not working with dataBase;
+  // Load user data from local storage when component mounts
+  useEffect(() => {
+    const savedUserData = localStorage.getItem("userData");
+    if (savedUserData) {
+      const parsedUserData = JSON.parse(savedUserData);
+      setFormData(parsedUserData);
+    }
+  }, []); // Empty dependency array ensures this effect runs only once when the component mounts
+
   function handleInputSave(event) {
     const { name, value } = event.target;
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        [name]: value === null ? "" : value,
-      };
-    });
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value === null ? "" : value,
+    }));
   }
-
-  // event represent the form input sending;
-  // prevents the event to our needs "hey stop ✋";
 
   function handleSubmit(event) {
     event.preventDefault();
     const newErrors = InputValidation(formData);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log("Form SuccessFully submitted!", formData);
+      console.log("Form Successfully submitted!", formData);
+
+      // Save form data in local storage
+      localStorage.setItem("userData", JSON.stringify(formData));
 
       setFormData({
         userName: "",
@@ -53,7 +54,7 @@ export default function Register() {
       });
 
       setErrors({});
-      navigate("/login");
+      navigate("/");
     } else {
       setErrors(newErrors);
       console.log("Form Validation Failed please fill out the inputs!");
@@ -142,7 +143,7 @@ export default function Register() {
             {imageUrl && <img src={imageUrl} alt="selected-image" />}
           </div>
 
-          <button onClick={handleSubmit}>SUBMIT</button>
+          <button type="submit">SUBMIT</button>
         </form>
       </div>
     </>

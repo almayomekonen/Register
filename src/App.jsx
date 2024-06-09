@@ -3,8 +3,8 @@ import Register from "./Components/Authorization/Register/Register";
 import Login from "./Components/Authorization/Login/Login";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Register /> },
-  { path: "/login", element: <Login /> },
+  { path: "/", element: <Login /> },
+  { path: "/register", element: <Register /> },
 ]);
 
 export default function App() {
