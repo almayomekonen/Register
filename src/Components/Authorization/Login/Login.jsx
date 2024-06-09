@@ -3,7 +3,9 @@ import youtubeIcon from "../../../assets/youtube.png";
 import Header from "../../Header/Header";
 import "./Login.css";
 import { LoginValidation } from "../../../InputValidation";
+import { Link } from "react-router-dom";
 
+let success;
 export default function Login() {
   const [formData, setFormData] = useState({
     userName: "",
@@ -36,19 +38,28 @@ export default function Login() {
       const parsedUserData = JSON.parse(savedUserData);
       if (
         Object.keys(parsedUserData).length > 0 &&
-        formData.userName === parsedUserData.userName
+        formData.userName === parsedUserData.userName &&
+        formData.password === parsedUserData.password
       ) {
-        if (formData.password === parsedUserData.password) {
-          console.log("Successfully logged in!");
-          // Clear form data and errors on successful login
-          setFormData({
-            userName: "",
-            password: "",
-          });
-        } else {
-          setErrors({ password: "password not match" });
-        }
+        success = "Successfully logged in!";
+
+        setFormData({
+          userName: "",
+          password: "",
+        });
+
+        setErrors({});
+      } else {
+        setErrors({
+          userName: "Username is incorrect",
+          password: "Password is incorrect",
+        });
       }
+    } else {
+      setErrors({
+        userName: "Username is incorrect",
+        password: "Password is incorrect",
+      });
     }
   }
 
@@ -77,8 +88,11 @@ export default function Login() {
             />
             {errors.password && <p className="error">{errors.password}</p>}
           </div>
+          <span className="success">{success}</span>
           <br />
           <button type="submit">Login</button>
+          <br />
+          <Link to="/register">Don&rsquo;t You have account yet?</Link>
         </form>
       </div>
     </>

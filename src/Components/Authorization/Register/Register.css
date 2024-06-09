@@ -6,6 +6,7 @@
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
 .input-wrapper input {
@@ -65,4 +66,12 @@ img {
   height: 5rem;
   border-radius: 50%;
   margin-top: 1rem;
+}
+.back-link{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: black;
+  background: transparent;
+  margin:1rem;
 }
