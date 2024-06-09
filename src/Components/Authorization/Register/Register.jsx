@@ -5,6 +5,8 @@ import { InputValidation } from "../../../InputValidation";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
 
+//... implementation of saving the users information
+
 export default function Register() {
   //making the UI changes visible to the users;
   const [formData, setFormData] = useState({
